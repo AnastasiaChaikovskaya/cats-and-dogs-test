@@ -23,7 +23,7 @@ export const Navbar = () => {
           <Link href={APP_ROUTS.App.Main.Dogs.Root.path} legacyBehavior passHref>
             <NavigationMenuLink
               className={cn(
-                'hover:bg-stone-100 transition-colors p-2 rounded-md text-black',
+                'hover:bg-stone-100 transition-colors p-2 rounded-md text-black text-sm',
                 pathName === APP_ROUTS.App.Main.Dogs.Root.path &&
                   'bg-black text-white p-2 rounded-md pointer-events-none',
               )}
@@ -37,7 +37,7 @@ export const Navbar = () => {
           <Link href={APP_ROUTS.App.Main.Cats.Root.path} legacyBehavior passHref>
             <NavigationMenuLink
               className={cn(
-                'hover:bg-stone-100 transition-colors p-2 rounded-md text-black',
+                'hover:bg-stone-100 transition-colors p-2 rounded-md text-black text-sm',
                 pathName === APP_ROUTS.App.Main.Cats.Root.path &&
                   'bg-black text-white p-2 rounded-md pointer-events-none',
               )}

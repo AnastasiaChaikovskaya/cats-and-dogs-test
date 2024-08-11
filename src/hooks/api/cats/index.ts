@@ -1,2 +1,2 @@
 export * from './useCatsBreedList';
-// export * from './useCatById';
+export * from './useCatById';

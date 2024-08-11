@@ -30,9 +30,9 @@ export default function RootLayout({
         <header className="flex gap-5 items-center py-2 border-b border-stone-200 mb-6">
           <Link
             href={APP_ROUTS.App.Main.Root.path}
-            className="flex justify-center items-center font-bold text-lg w-10 h-10 rounded-full bg-black"
+            className="flex justify-center items-center font-bold text-lg w-8 h-8 rounded-full bg-black"
           >
-            <PawPrint className="h-8 w-8 text-white" />
+            <PawPrint className="h-6 w-6 text-white" />
           </Link>
           <Navbar />
         </header>

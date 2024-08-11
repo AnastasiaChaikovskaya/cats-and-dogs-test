@@ -17,6 +17,7 @@ export const useCatsBreedList = (queryParams: IBaseQueryParams) => {
       toast({
         title: 'Server error',
         description: 'Unable to fetch cat breed list',
+        variant: 'destructive',
       });
     }
   }, [catsQuery.isError]);

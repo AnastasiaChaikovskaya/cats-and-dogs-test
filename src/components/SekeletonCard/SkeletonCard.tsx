@@ -4,12 +4,12 @@ import { Card, CardHeader, CardContent } from '../ui/card';
 
 export const SkeletonCard = () => {
   return (
-    <Card>
+    <Card className="w-[250px] md:w-[300px]">
       <CardHeader>
-        <Skeleton className="h-4 w-56" />
+        <Skeleton className="h-4 w-full" />
       </CardHeader>
       <CardContent>
-        <Skeleton className="h-40 w-full" />
+        <Skeleton className="h-[250px] w-full" />
       </CardContent>
     </Card>
   );
