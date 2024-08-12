@@ -15,11 +15,10 @@ const CatsPage = () => {
   const router = useRouter();
 
   const currentPage = searchParams.get('page') || '1';
-  const limit = searchParams.get('limit') || '10';
 
   const { data, isLoading, isError } = useCatsBreedList({
     page: currentPage,
-    limit: limit,
+    limit: '15',
     has_breeds: '1',
   });
 
@@ -33,7 +32,7 @@ const CatsPage = () => {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center flex-wrap gap-2 md:flex-row md:gap-3 md:justify-center">
-        {Array.from({ length: 11 }, (_, i) => (
+        {Array.from({ length: 15 }, (_, i) => (
           <SkeletonCard key={i} />
         ))}
       </div>

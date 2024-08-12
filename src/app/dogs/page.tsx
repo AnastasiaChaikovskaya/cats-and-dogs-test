@@ -6,7 +6,7 @@ import { APP_ROUTS } from '@/constants/routes';
 import { useDogsBreedList } from '@/hooks/api/dog/useDogsBreedList';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Pagination, PaginationContent, PaginationItem } from '@/components/ui/pagination';
 import { Button } from '@/components/ui/button';
 
@@ -15,11 +15,10 @@ const DogsPage = () => {
   const router = useRouter();
 
   const currentPage = searchParams.get('page') || '1';
-  const limit = searchParams.get('limit') || '10';
 
   const { data, isLoading, isError } = useDogsBreedList({
     page: currentPage,
-    limit: limit,
+    limit: '15',
     has_breeds: '1',
   });
 
@@ -34,38 +33,34 @@ const DogsPage = () => {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center flex-wrap gap-2 md:flex-row md:gap-3 md:justify-center">
-        {Array.from({ length: 11 }, (_, i) => (
+        {Array.from({ length: 15 }, (_, i) => (
           <SkeletonCard key={i} />
         ))}
       </div>
     );
   }
   return (
-    <Suspense>
-      <div className="flex flex-col items-center flex-wrap gap-2 md:flex-row md:gap-3 md:justify-center">
-        {data &&
-          data.length > 0 &&
-          data.map((dog) => (
-            <PetCard key={dog.id} pet={dog} url={APP_ROUTS.App.Main.Dogs.DogDetails.makePath(dog.id)} />
-          ))}
+    <div className="flex flex-col items-center flex-wrap gap-2 md:flex-row md:gap-3 md:justify-center">
+      {data &&
+        data.length > 0 &&
+        data.map((dog) => <PetCard key={dog.id} pet={dog} url={APP_ROUTS.App.Main.Dogs.DogDetails.makePath(dog.id)} />)}
 
-        <Pagination>
-          <PaginationContent className="gap-4">
-            <PaginationItem>
-              <Button onClick={() => handlePageChange(+currentPage - 1)} disabled={+currentPage <= 1}>
-                Previous
-              </Button>
-            </PaginationItem>
+      <Pagination>
+        <PaginationContent className="gap-4">
+          <PaginationItem>
+            <Button onClick={() => handlePageChange(+currentPage - 1)} disabled={+currentPage <= 1}>
+              Previous
+            </Button>
+          </PaginationItem>
 
-            <PaginationItem>
-              <Button onClick={() => handlePageChange(+currentPage + 1)} disabled={+currentPage > 7}>
-                Next
-              </Button>
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </div>
-    </Suspense>
+          <PaginationItem>
+            <Button onClick={() => handlePageChange(+currentPage + 1)} disabled={+currentPage > 7}>
+              Next
+            </Button>
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </div>
   );
 };
 
