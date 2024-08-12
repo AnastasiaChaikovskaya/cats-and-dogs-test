@@ -6,10 +6,9 @@ import { APP_ROUTS } from '@/constants/routes';
 import { useDogsBreedList } from '@/hooks/api/dog/useDogsBreedList';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 import { Pagination, PaginationContent, PaginationItem } from '@/components/ui/pagination';
 import { Button } from '@/components/ui/button';
-import { Loader } from 'lucide-react';
 
 const DogsPage = () => {
   const searchParams = useSearchParams();
@@ -42,12 +41,14 @@ const DogsPage = () => {
     );
   }
   return (
-    <div className="flex flex-col items-center flex-wrap gap-2 md:flex-row md:gap-3 md:justify-center">
-      {data &&
-        data.length > 0 &&
-        data.map((dog) => <PetCard key={dog.id} pet={dog} url={APP_ROUTS.App.Main.Dogs.DogDetails.makePath(dog.id)} />)}
+    <Suspense>
+      <div className="flex flex-col items-center flex-wrap gap-2 md:flex-row md:gap-3 md:justify-center">
+        {data &&
+          data.length > 0 &&
+          data.map((dog) => (
+            <PetCard key={dog.id} pet={dog} url={APP_ROUTS.App.Main.Dogs.DogDetails.makePath(dog.id)} />
+          ))}
 
-      <Suspense fallback={<Loader className="h-6 w-6 animate-spin" />}>
         <Pagination>
           <PaginationContent className="gap-4">
             <PaginationItem>
@@ -63,8 +64,8 @@ const DogsPage = () => {
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-      </Suspense>
-    </div>
+      </div>
+    </Suspense>
   );
 };
 
