@@ -6,9 +6,10 @@ import { APP_ROUTS } from '@/constants/routes';
 import { useDogsBreedList } from '@/hooks/api/dog/useDogsBreedList';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Pagination, PaginationContent, PaginationItem } from '@/components/ui/pagination';
 import { Button } from '@/components/ui/button';
+import { Loader } from 'lucide-react';
 
 const DogsPage = () => {
   const searchParams = useSearchParams();
@@ -46,21 +47,23 @@ const DogsPage = () => {
         data.length > 0 &&
         data.map((dog) => <PetCard key={dog.id} pet={dog} url={APP_ROUTS.App.Main.Dogs.DogDetails.makePath(dog.id)} />)}
 
-      <Pagination>
-        <PaginationContent className="gap-4">
-          <PaginationItem>
-            <Button onClick={() => handlePageChange(+currentPage - 1)} disabled={+currentPage <= 1}>
-              Previous
-            </Button>
-          </PaginationItem>
+      <Suspense fallback={<Loader className="h-6 w-6 animate-spin" />}>
+        <Pagination>
+          <PaginationContent className="gap-4">
+            <PaginationItem>
+              <Button onClick={() => handlePageChange(+currentPage - 1)} disabled={+currentPage <= 1}>
+                Previous
+              </Button>
+            </PaginationItem>
 
-          <PaginationItem>
-            <Button onClick={() => handlePageChange(+currentPage + 1)} disabled={+currentPage > 7}>
-              Next
-            </Button>
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            <PaginationItem>
+              <Button onClick={() => handlePageChange(+currentPage + 1)} disabled={+currentPage > 7}>
+                Next
+              </Button>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </Suspense>
     </div>
   );
 };

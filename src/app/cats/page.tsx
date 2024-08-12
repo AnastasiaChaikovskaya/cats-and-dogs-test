@@ -6,9 +6,10 @@ import { APP_ROUTS } from '@/constants/routes';
 import { useCatsBreedList } from '@/hooks/api';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Pagination, PaginationContent, PaginationItem } from '@/components/ui/pagination';
 import { Button } from '@/components/ui/button';
+import { Loader } from 'lucide-react';
 
 const CatsPage = () => {
   const searchParams = useSearchParams();
@@ -45,21 +46,23 @@ const CatsPage = () => {
         data.length > 0 &&
         data.map((cat) => <PetCard key={cat.id} pet={cat} url={APP_ROUTS.App.Main.Cats.CatDetails.makePath(cat.id)} />)}
 
-      <Pagination>
-        <PaginationContent className="gap-4">
-          <PaginationItem>
-            <Button onClick={() => handlePageChange(+currentPage - 1)} disabled={+currentPage <= 1}>
-              Previous
-            </Button>
-          </PaginationItem>
+      <Suspense fallback={<Loader className="h-6 w-6 animate-spin" />}>
+        <Pagination>
+          <PaginationContent className="gap-4">
+            <PaginationItem>
+              <Button onClick={() => handlePageChange(+currentPage - 1)} disabled={+currentPage <= 1}>
+                Previous
+              </Button>
+            </PaginationItem>
 
-          <PaginationItem>
-            <Button onClick={() => handlePageChange(+currentPage + 1)} disabled={+currentPage > 7}>
-              Next
-            </Button>
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            <PaginationItem>
+              <Button onClick={() => handlePageChange(+currentPage + 1)} disabled={+currentPage > 7}>
+                Next
+              </Button>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </Suspense>
     </div>
   );
 };
