@@ -24,7 +24,7 @@ export const PetCard: FC<IPetCard> = ({ pet, url }) => {
   }, []);
 
   return (
-    <Link href={url} className="w-[250px] md:w-[300px]">
+    <Link href={url} className="w-[250px] md:w-[300px] transition-all hover:shadow-md hover:scale-105">
       <Card>
         <CardHeader>
           <CardTitle className="text-base">{petName}</CardTitle>

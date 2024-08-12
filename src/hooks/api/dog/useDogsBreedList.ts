@@ -19,7 +19,7 @@ export const useDogsBreedList = (queryParams: IBaseQueryParams) => {
         description: 'Unable to fetch dog breed list',
       });
     }
-  }, [dogsQuery.isError]);
+  }, [dogsQuery.isError, queryParams]);
 
   return dogsQuery;
 };
