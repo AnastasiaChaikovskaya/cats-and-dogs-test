@@ -43,7 +43,7 @@ const CatsPage = () => {
     <div className="flex flex-col items-center flex-wrap gap-2 md:flex-row md:gap-3 md:justify-center">
       {data &&
         data.length > 0 &&
-        data.map((cat) => <PetCard pet={cat} url={APP_ROUTS.App.Main.Cats.CatDetails.makePath(cat.id)} />)}
+        data.map((cat) => <PetCard key={cat.id} pet={cat} url={APP_ROUTS.App.Main.Cats.CatDetails.makePath(cat.id)} />)}
 
       <Pagination>
         <PaginationContent className="gap-4">
